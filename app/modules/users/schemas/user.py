@@ -2,6 +2,8 @@ from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 from app.modules.users.enums import UserStatus
 
+_ALLOWED_STATUSES = (UserStatus.ACTIVE, UserStatus.INACTIVE)
+
 
 class UserBase(BaseModel):
     first_name: str = Field(min_length=1, max_length=100)
@@ -24,7 +26,7 @@ class UserUpdate(BaseModel):
     @field_validator("status")
     @classmethod
     def validate_status(cls, value: UserStatus) -> UserStatus:
-        if value not in (UserStatus.ACTIVE, UserStatus.INACTIVE):
+        if value not in _ALLOWED_STATUSES:
             raise ValueError("Status must be active or inactive")
         return value
 
@@ -38,7 +40,7 @@ class UserPatch(BaseModel):
     @field_validator("status")
     @classmethod
     def validate_status(cls, value: UserStatus | None) -> UserStatus | None:
-        if value is not None and value not in (UserStatus.ACTIVE, UserStatus.INACTIVE):
+        if value is not None and value not in _ALLOWED_STATUSES:
             raise ValueError("Status must be active or inactive")
         return value
 
