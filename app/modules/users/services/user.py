@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.core.pagination import paginate
 from app.exceptions import DuplicateException, NotFoundException
-from app.modules.users.enums import UserStatus
+from app.core.enums import Status as UserStatus
 from app.modules.users.models.user import User
 from app.modules.users.schemas.user import UserCreate, UserPatch, UserUpdate
 

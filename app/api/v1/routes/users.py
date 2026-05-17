@@ -27,7 +27,11 @@ def show(user_id: int, db: DbSession):
     return SingleResponse(data=UserService(db).get_by_id(user_id))
 
 
-@router.post("/", response_model=SingleResponse[UserResponse], status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/",
+    response_model=SingleResponse[UserResponse],
+    status_code=status.HTTP_201_CREATED,
+)
 def store(user_data: UserCreate, db: DbSession):
     return SingleResponse(data=UserService(db).create(user_data))
 

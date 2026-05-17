@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
 
 from app.core.database import Base
-from app.modules.users.enums import UserStatus
+from app.core.enums import Status as UserStatus
 
 
 class User(Base):
