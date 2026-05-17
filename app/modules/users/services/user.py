@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.core.pagination import paginate
 from app.exceptions import DuplicateException, NotFoundException
 from app.modules.users.enums import UserStatus
 from app.modules.users.models.user import User
@@ -55,10 +56,9 @@ class UserService:
 
         return user
 
-    def get_all(self) -> list[User]:
-        return self.db.scalars(
-            select(User).where(User.status == UserStatus.ACTIVE)
-        ).all()
+    def get_all(self, page: int = 1, page_size: int = 20) -> dict:
+        query = select(User).where(User.status == UserStatus.ACTIVE)
+        return paginate(self.db, query, page, page_size)
 
     def get_by_id(self, user_id: int) -> User:
         return self._get_active_user(user_id)
