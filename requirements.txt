@@ -43,3 +43,5 @@ websockets==16.0
 alembic
 sqlalchemy
 pymysql
+cryptography
+ruff
