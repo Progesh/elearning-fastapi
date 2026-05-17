@@ -8,7 +8,7 @@ from app.core.config import settings
 from app.core.database import Base
 
 # Import all models so Base.metadata is populated
-import app.modules.models
+import app.modules.models  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
