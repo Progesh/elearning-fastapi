@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from app.api.v1.api import api_router
-from app.exceptions import AppException
+from app.core.exceptions import AppException
 
 app = FastAPI()
 
