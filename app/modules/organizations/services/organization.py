@@ -9,7 +9,7 @@ from app.modules.organizations.schemas.organization import (
 from app.modules.organizations.models.organization import Organization
 from app.core.pagination import paginate
 from app.core.enums import Status as OrganizationStatus
-from app.exceptions import NotFoundException
+from app.core.exceptions import NotFoundException
 
 
 class OrganizationService:
