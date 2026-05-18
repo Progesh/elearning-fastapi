@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Query, status
 
-from app.core.database import DbSession
-from app.core.schemas import PaginatedResponse, SingleResponse
-from app.modules.users.schemas.user import (
+from src.core.database import DbSession
+from src.core.schemas import PaginatedResponse, SingleResponse
+from src.modules.users.schemas.user import (
     UserCreate,
     UserPatch,
     UserUpdate,
     UserResponse,
 )
-from app.modules.users.services.user import UserService
+from src.modules.users.services.user import UserService
 
 router = APIRouter()
 

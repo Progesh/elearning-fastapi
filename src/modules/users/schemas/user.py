@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
-from app.core.enums import Status as UserStatus
+from src.core.enums import Status as UserStatus
 
 _ALLOWED_STATUSES = (UserStatus.ACTIVE, UserStatus.INACTIVE)
 

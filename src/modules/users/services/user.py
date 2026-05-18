@@ -1,11 +1,11 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.core.pagination import paginate
-from app.core.exceptions import DuplicateException, NotFoundException
-from app.core.enums import Status as UserStatus
-from app.modules.users.models.user import User
-from app.modules.users.schemas.user import UserCreate, UserPatch, UserUpdate
+from src.core.pagination import paginate
+from src.core.exceptions import DuplicateException, NotFoundException
+from src.core.enums import Status as UserStatus
+from src.modules.users.models.user import User
+from src.modules.users.schemas.user import UserCreate, UserPatch, UserUpdate
 
 
 class UserService:

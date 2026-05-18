@@ -1,15 +1,15 @@
 from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
-from app.modules.organizations.schemas.organization import (
+from src.modules.organizations.schemas.organization import (
     OrganizationCreate,
     OrganizationUpdate,
     OrganizationPatch,
 )
-from app.modules.organizations.models.organization import Organization
-from app.core.pagination import paginate
-from app.core.enums import Status as OrganizationStatus
-from app.core.exceptions import NotFoundException
+from src.modules.organizations.models.organization import Organization
+from src.core.pagination import paginate
+from src.core.enums import Status as OrganizationStatus
+from src.core.exceptions import NotFoundException
 
 
 class OrganizationService:
