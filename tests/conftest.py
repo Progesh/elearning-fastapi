@@ -4,8 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.pool import StaticPool
 from sqlalchemy.orm import sessionmaker
 
-from app.core.database import Base, get_db
-from app.main import app
+from src.core.database import Base, get_db
+from src.main import app
 
 engine = create_engine(
     "sqlite://",

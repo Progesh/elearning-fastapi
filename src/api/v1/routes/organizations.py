@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Query, status
 
-from app.modules.organizations.schemas.organization import (
+from src.modules.organizations.schemas.organization import (
     OrganizationResponse,
     OrganizationCreate,
     OrganizationUpdate,
     OrganizationPatch,
 )
-from app.modules.organizations.services.organization import OrganizationService
-from app.core.database import DbSession
-from app.core.schemas import SingleResponse, PaginatedResponse
+from src.modules.organizations.services.organization import OrganizationService
+from src.core.database import DbSession
+from src.core.schemas import SingleResponse, PaginatedResponse
 
 router = APIRouter()
 

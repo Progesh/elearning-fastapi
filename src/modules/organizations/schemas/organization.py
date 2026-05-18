@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from app.core.enums import Status as OrganizationStatus
+from src.core.enums import Status as OrganizationStatus
 
 _ALLOWED_STATUSES = (OrganizationStatus.ACTIVE, OrganizationStatus.INACTIVE)
 

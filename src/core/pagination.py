@@ -3,7 +3,7 @@ import math
 from sqlalchemy import Select, func, select
 from sqlalchemy.orm import Session
 
-from app.core.schemas import PaginatedResponse, PaginationMeta
+from src.core.schemas import PaginatedResponse, PaginationMeta
 
 
 def paginate(
