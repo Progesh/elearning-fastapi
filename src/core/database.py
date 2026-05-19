@@ -4,9 +4,9 @@ from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
-from src.core.config import settings
+from src.core.config import get_settings
 
-engine = create_engine(settings.DATABASE_URL)
+engine = create_engine(get_settings().DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
