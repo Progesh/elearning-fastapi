@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query, status
+from fastapi import APIRouter, Depends, Query, status
 
 from src.modules.organizations.schemas.organization import (
     OrganizationResponse,
@@ -8,9 +8,10 @@ from src.modules.organizations.schemas.organization import (
 )
 from src.modules.organizations.services.organization import OrganizationService
 from src.core.database import DbSession
+from src.core.dependencies import require_auth
 from src.core.schemas import SingleResponse, PaginatedResponse
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_auth)])
 
 
 @router.get("/", response_model=PaginatedResponse[OrganizationResponse])

@@ -5,6 +5,7 @@ from sqlalchemy.pool import StaticPool
 from sqlalchemy.orm import sessionmaker
 
 from src.core.database import Base, get_db
+from src.core.dependencies import require_auth
 from src.main import app
 
 engine = create_engine(
@@ -28,6 +29,7 @@ def client():
             db.close()
 
     app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[require_auth] = lambda: "test-client"
 
     with TestClient(app) as test_client:
         yield test_client
