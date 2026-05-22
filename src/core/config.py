@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRY_MINUTES: int = 60
 
+    CELERY_BROKER_URL: str = "redis://redis:6379/0"
+    CELERY_RESULT_BACKEND: str = "redis://redis:6379/0"
+
     @field_validator("JWT_SECRET_KEY")
     @classmethod
     def validate_secret_key(cls, value: str) -> str:

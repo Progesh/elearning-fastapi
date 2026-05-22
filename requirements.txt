@@ -47,3 +47,6 @@ pymysql
 cryptography
 PyJWT==2.10.1
 pwdlib[bcrypt]==0.2.1
+celery
+redis
+flower
