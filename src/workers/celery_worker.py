@@ -8,7 +8,7 @@ celery_worker = Celery(
     "elearning",
     broker=settings.CELERY_BROKER_URL,
     backend=settings.CELERY_RESULT_BACKEND,
-    include=["src.tasks"],
+    include=["src.tasks.sample"],
 )
 
 celery_worker.conf.update(
