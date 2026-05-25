@@ -12,5 +12,7 @@ api_router.include_router(users_router, prefix="/users", tags=["users"])
 api_router.include_router(
     organizations_router, prefix="/organizations", tags=["organizations"]
 )
-api_router.include_router(course_types_router, prefix="/course_types", tags=["course_types"])
+api_router.include_router(
+    course_types_router, prefix="/course_types", tags=["course_types"]
+)
 api_router.include_router(celery_test_router, prefix="/celery", tags=["celery-test"])

@@ -4,13 +4,14 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+import src.modules.models  # noqa: F401
 from src.core.database import Base
 from src.core.config import get_settings
 
 settings = get_settings()
 
 # Import all models so Base.metadata is populated
-import src.modules.models  # noqa: F401
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
