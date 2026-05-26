@@ -17,11 +17,11 @@ class CourseCreate(CourseBase):
 
 
 class CourseUpdate(CourseBase):
-    @field_validator('status')
+    @field_validator("status")
     @classmethod
     def validate_status(cls, value: CourseStatus) -> CourseStatus:
         if value not in _ALLOWED_STATUSES:
-            raise ValueError('Status must be active or inactive')
+            raise ValueError("Status must be active or inactive")
         return value
 
 

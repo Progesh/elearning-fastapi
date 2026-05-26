@@ -1,4 +1,3 @@
-
 BASE_URL = "/api/v1/course_types/"
 
 COURSE_TYPE_PAYLOAD = {
