@@ -14,4 +14,4 @@ class Course(Base):
     status = Column(String(20), default=CourseStatus.ACTIVE)
     course_type_id = Column(Integer, ForeignKey("course_type.id"), nullable=True)
 
-    course_type = relationship("CourseType", back_populates="courses")
+    course_type = relationship("CourseType")
