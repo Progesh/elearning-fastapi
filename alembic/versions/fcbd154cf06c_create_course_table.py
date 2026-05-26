@@ -28,7 +28,7 @@ def upgrade() -> None:
         sa.Column("name", sa.String(length=100), nullable=False),
         sa.Column("description", sa.Text(), nullable=True),
         sa.Column("status", sa.String(length=20), nullable=True),
-        sa.Column("course_type_id", sa.Integer(), nullable=True),
+        sa.Column("course_type_id", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(
             ["course_type_id"],
             ["course_type.id"],
