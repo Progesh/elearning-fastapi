@@ -47,6 +47,21 @@ def deleted_course_type(client):
     return {"id": course_type_id}
 
 
+@pytest.fixture()
+def created_course(client, active_course_type):
+    payload = {
+        "name": "Core Course",
+        "description": "Core description",
+        "status": "active",
+        "course_type_id": active_course_type["id"],
+    }
+
+    response = client.post(COURSE_BASE_URL, json=payload)
+    assert response.status_code == 201
+
+    return response.json()["data"]
+
+
 def test_create_course_with_active_course_type(client, active_course_type):
     payload = {
         "name": "Algebra 101",
@@ -124,3 +139,90 @@ def test_create_course_without_course_type_id_fails(client):
     response = client.post(COURSE_BASE_URL, json=payload)
 
     assert response.status_code == 422
+
+
+def test_get_courses(client, created_course):
+    response = client.get(COURSE_BASE_URL)
+
+    assert response.status_code == 200
+    data = response.json()["data"]
+    assert any(item["id"] == created_course["id"] for item in data)
+
+
+def test_get_course_by_id(client, created_course):
+    response = client.get(f"{COURSE_BASE_URL}{created_course['id']}")
+
+    assert response.status_code == 200
+    data = response.json()["data"]
+    assert data["id"] == created_course["id"]
+
+
+def test_get_nonexistent_course_fails(client):
+    response = client.get(f"{COURSE_BASE_URL}99999")
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Course not found"
+
+
+def test_update_course(client, created_course, active_course_type):
+    payload = {
+        "name": "Updated Course",
+        "description": "Updated description",
+        "status": "inactive",
+        "course_type_id": active_course_type["id"],
+    }
+
+    response = client.put(f"{COURSE_BASE_URL}{created_course['id']}", json=payload)
+
+    assert response.status_code == 200
+    data = response.json()["data"]
+    assert data["name"] == "Updated Course"
+    assert data["status"] == "inactive"
+
+
+def test_update_course_with_inactive_course_type_fails(
+    client, created_course, inactive_course_type
+):
+    payload = {
+        "name": "Updated Course",
+        "description": "Updated description",
+        "status": "active",
+        "course_type_id": inactive_course_type["id"],
+    }
+
+    response = client.put(f"{COURSE_BASE_URL}{created_course['id']}", json=payload)
+
+    assert response.status_code == 422
+    detail = response.json()["detail"]
+    assert isinstance(detail, list)
+    assert detail[0]["loc"] == ["body", "course_type_id"]
+
+
+def test_update_nonexistent_course_fails(client, active_course_type):
+    payload = {
+        "name": "Updated Course",
+        "description": "Updated description",
+        "status": "active",
+        "course_type_id": active_course_type["id"],
+    }
+
+    response = client.put(f"{COURSE_BASE_URL}99999", json=payload)
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Course not found"
+
+
+def test_delete_course(client, created_course):
+    response = client.delete(f"{COURSE_BASE_URL}{created_course['id']}")
+
+    assert response.status_code == 204
+
+    get_response = client.get(f"{COURSE_BASE_URL}{created_course['id']}")
+    assert get_response.status_code == 404
+
+
+def test_delete_nonexistent_course_fails(client):
+    response = client.delete(f"{COURSE_BASE_URL}99999")
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Course not found"
