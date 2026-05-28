@@ -4,6 +4,7 @@ services:
     container_name: elearning-app
     ports:
       - "8081:8081"
+      - "5678:5678"
     volumes:
       - .:/app
     env_file:
