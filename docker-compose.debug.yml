@@ -1,0 +1,8 @@
+services:
+  app:
+    environment:
+      WATCHFILES_FORCE_POLLING: "true"
+    command: >
+      python -m debugpy --listen 0.0.0.0:5678 --wait-for-client
+      -m uvicorn src.main:app --host 0.0.0.0 --port 8081
+      --reload --reload-dir /app/src
